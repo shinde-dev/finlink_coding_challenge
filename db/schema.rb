@@ -12,9 +12,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_211_203_095_436) do
+ActiveRecord::Schema.define(version: 20_211_204_145_257) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
+
+  create_table 'readings', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'thermostat_id', null: false
+    t.integer 'number'
+    t.float 'temprature'
+    t.float 'humidity'
+    t.float 'battery_charge'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['thermostat_id'], name: 'index_readings_on_thermostat_id'
+  end
 
   create_table 'thermostats', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.text 'household_token', null: false
@@ -22,4 +33,6 @@ ActiveRecord::Schema.define(version: 20_211_203_095_436) do
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
   end
+
+  add_foreign_key 'readings', 'thermostats'
 end

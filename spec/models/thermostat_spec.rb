@@ -9,6 +9,10 @@ RSpec.describe Thermostat, type: :model do
     it { is_expected.to have_db_column(:location).of_type(:string) }
   end
 
+  describe 'associations' do
+    it { is_expected.to have_many(:readings) }
+  end
+
   describe 'valid' do
     it 'is valid with valid attributes' do
       expect(FactoryBot.create(:thermostat)).to be_valid
