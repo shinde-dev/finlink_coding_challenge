@@ -14,7 +14,7 @@ module JsonResponses
   end
 
   def render_not_found_response(message)
-    render_response(message, :not_found)
+    render json: { message: message }, status: :not_found
   end
 
   def render_response(message, code, data, serializer)
