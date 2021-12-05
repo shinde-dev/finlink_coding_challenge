@@ -18,6 +18,6 @@ module JsonResponses
   end
 
   def render_response(message, code, data = {})
-    render json: { responseMessage: message, data: data }, status: code
+    render json: { message: message, data: data }, status: code
   end
 end

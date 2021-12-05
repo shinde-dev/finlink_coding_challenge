@@ -4,7 +4,7 @@ module Api
   module V1
     class ReadingsController < ApplicationController
       def create
-        reading = Readings::Create.run(readings_params)
+        reading = Readings::Create.run(readings_params.merge!({ thermostat_id: current_thermostat.id }))
 
         if reading.valid?
           render_success_response('created', reading.result)
@@ -26,7 +26,7 @@ module Api
       private
 
       def readings_params
-        params.require(:readings).permit(:thermostat_id, :humidity, :number, :temprature, :battery_charge)
+        params.require(:readings).permit(:humidity, :number, :temprature, :battery_charge)
       end
     end
   end
