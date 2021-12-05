@@ -18,8 +18,8 @@ services:
       - db
       - redis
       - sidekiq
-    environment:
-      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
+    env_file:
+      - .env
     tty: true
     stdin_open: true
 
@@ -39,8 +39,8 @@ services:
     command: bundle exec sidekiq
     volumes:
       - '.:/myapp'
-    environment:
-      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
+    env_file:
+      - .env
     tty: true
     stdin_open: true
 

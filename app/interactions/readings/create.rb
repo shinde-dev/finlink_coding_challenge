@@ -17,6 +17,8 @@ module Readings
       reading.id = SecureRandom.uuid
 
       if reading.valid?
+        # add reading record to redis cache
+        REDIS.set(reading.id, reading.to_json)
         Readings::CreateJob.perform_later(reading.attributes)
       else
         errors.merge!(reading.errors)
