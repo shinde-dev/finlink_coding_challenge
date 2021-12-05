@@ -7,7 +7,7 @@ module Api
         reading = Readings::Create.run(readings_params.merge!({ thermostat_id: current_thermostat.id }))
 
         if reading.valid?
-          render_success_response('created', reading.result)
+          render_success_response('created', reading.result, ReadingSerializer)
         else
           render_error_response(reading.errors.full_messages.to_sentence)
         end
@@ -17,7 +17,7 @@ module Api
         reading = Readings::Find.run(params)
 
         if reading.valid?
-          render_response('success', 200, reading.result)
+          render_response('success', 200, reading.result, ReadingSerializer)
         else
           render_not_found_response(reading.errors.full_messages.to_sentence)
         end
