@@ -14,8 +14,13 @@ module Readings
 
     def execute
       reading = Reading.new(inputs)
+      reading.id = SecureRandom.uuid
 
-      errors.merge!(reading.errors) unless reading.save
+      if reading.valid?
+        Readings::CreateJob.perform_later(reading.attributes)
+      else
+        errors.merge!(reading.errors)
+      end
 
       reading
     end
