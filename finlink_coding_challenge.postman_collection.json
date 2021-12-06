@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "0b7c5324-e06e-4f30-b81f-e23929f8e905",
+		"name": "finlink_coding_challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Readings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzg3ODYyNTZ9.CXXOKXp_-1B-Vwdq0UsYKjAmOoP4k4-zh52Y1Rz_3-A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"readings\": {\n        \"number\": 1,\n        \"temprature\": 1.5,\n        \"humidity\": 4.8,\n        \"battery_charge\": 0.7\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/readings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"readings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Readings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzg3ODYyNTZ9.CXXOKXp_-1B-Vwdq0UsYKjAmOoP4k4-zh52Y1Rz_3-A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/readings/bea35b60-8da6-4bfb-bcd8-8a826befb4fb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"readings",
+						"bea35b60-8da6-4bfb-bcd8-8a826befb4fb"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
