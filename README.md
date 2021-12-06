@@ -1,24 +1,94 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dependencies
+* Ruby version : 3.0.0
+* Rails Version : 6.1.4.1
+* Redis : 5.0.7
+* Postgresql : 12.9
 
-Things you may want to cover:
+## Environment Configuration
+* Rename .env.example to .env and add values according to your local machine. Current values are set according to docker images.
 
-* Ruby version
+## Manually Testing APIs
+* Import postman collection added at root directory with file name finlink_coding_challenge.postman_collection.json.
+* Change postman collection values e.g. parameters or household_token as `Authorization: Bearer your_household_token` as per your local DB values
 
-* System dependencies
+## Setup with Docker
 
-* Configuration
+### Prerequisites
 
-* Database creation
+* Docker
+* Docker-Compose
 
-* Database initialization
+## Setup and start the applicaton with docker
 
-* How to run the test suite
+### Stop local postgres and redis service to avoid default port conflicts
+```
+$ sudo service postgresq stop
+```
+```
+$ sudo service redis stop
+```
+```
+$ sudo service redis-server stop
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Build docker image
+```
+$ docker-compose build
+```
 
-* Deployment instructions
+### Setup database
+```
+$ docker-compose run web rake db:create db:migrate db:seed
+```
 
-* ...
+### Run the server and sidekiq
+```
+$ docker-compose up
+```
+
+### Run the Test Suit
+```
+$ docker-compose run web rspec
+```
+
+### Run the rubocop
+```
+$ docker-compose run web rubocop
+```
+
+## Setup and start the applicaton without Docker
+
+### Install Dependencies
+```
+$ gem install bundler && bundle install
+```
+
+### Setup database
+```
+$ rake db:create db:migrate && rake db:seed
+```
+
+### Run the server and sidekiq(in another tab)
+```
+$ rails s
+```
+
+```
+$ sidekiq
+```
+
+### Run the Test Suit
+```
+$ rspec
+```
+
+### Run the rubocop
+```
+$ rubocop
+```
+
+## Future Enhancements
+* Using internationalisation gem I18n for translating application to a single custom language.
+* Use Faker for creating fake random test data.
